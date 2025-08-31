@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Educacional | GitHub Pages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #4a6cf7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #4a6cf7;
+            outline: none;
+        }
+        
+        .btn {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: #3a5cd8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .warning {
+            background: #fff4e6;
+            border-left: 4px solid #ffa94d;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .data-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .data-preview h3 {
+            margin-bottom: 10px;
+            color: #4a6cf7;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .admin-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .admin-data {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .data-entry {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .close-admin {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .admin-access-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4a6cf7;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+        
+        .admin-access-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-actions .btn {
+            width: auto;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .empty-data {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }
+        
+        .github-info {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .github-info a {
+            color: #4a6cf7;
+            text-decoration: none;
+        }
+        
+        .github-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .admin-actions {
+                flex-direction: column;
+            }
+            
+            .admin-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Formulário Educacional</h1>
+            <p>Demonstração para GitHub Pages</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="warning">
+                <strong><i class="fas fa-exclamation-triangle"></i> Aviso:</strong> Esta é uma página de exemplo criada para fins educacionais. 
+                Os dados são armazenados apenas localmente no seu navegador.
+            </div>
+            
+            <form id="sample-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Nome Completo</label>
+                    <input type="text" id="name" placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Telefone</label>
+                    <input type="tel" id="phone" placeholder="Digite seu telefone">
+                </div>
+                
+                <button type="button" class="btn" onclick="simulateSubmission()">
+                    <i class="fas fa-paper-plane"></i> Enviar Dados
+                </button>
+            </form>
+            
+            <div class="data-preview" id="data-preview">
+                <h3>Obrigado por enviar!</h3>
+                <p>Esta é apenas uma demonstração. Seus dados não foram compartilhados.</p>
+            </div>
+            
+            <div class="github-info">
+                <p><i class="fab fa-github"></i> Este projeto está hospedado no GitHub Pages</p>
+                <p>Veja o código fonte em: <a href="https://github.com/" target="_blank">github.com</a></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Esta é uma demonstração educacional. Não insira dados reais.</p>
+        </div>
+    </div>
+    
+    <!-- Botão de acesso à área administrativa -->
+    <div class="admin-access-btn" id="admin-access-btn" onclick="openAdminPanel()">
+        <i class="fas fa-lock"></i>
+    </div>
+    
+    <!-- Painel administrativo -->
+    <div class="admin-overlay" id="admin-overlay" onclick="closeAdminPanel()"></div>
+    <div class="admin-panel" id="admin-panel">
+        <span class="close-admin" onclick="closeAdminPanel()">&times;</span>
+        <h2><i class="fas fa-user-shield"></i> Painel Administrativo</h2>
+        
+        <div class="form-group">
+            <label for="admin-password"><i class="fas fa-key"></i> Senha de Administrador</label>
+            <input type="password" id="admin-password" placeholder="Digite a senha">
+        </div>
+        
+        <button class="btn" onclick="accessAdminData()">
+            <i class="fas fa-sign-in-alt"></i> Acessar Dados
+        </button>
+        
+        <div id="admin-data" class="admin-data" style="display: none;">
+            <h3><i class="fas fa-database"></i> Dados Coletados</h3>
+            <div id="admin-data-content"></div>
+            
+            <div class="admin-actions">
+                <button class="btn btn-success" onclick="downloadData()">
+                    <i class="fas fa-download"></i> Baixar JSON
+                </button>
+                <button class="btn btn-secondary" onclick="clearAllData()">
+                    <i class="fas fa-trash"></i> Limpar Dados
+                </button>
+                <button class="btn btn-danger" onclick="closeAdminPanel()">
+                    <i class="fas fa-times"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array para armazenar os dados (simulando um banco de dados)
+        let collectedData = JSON.parse(localStorage.getItem('formData')) || [];
+        const ADMIN_PASSWORD = "admin123"; // Senha para acessar os dados
+        
+        // Função para simular o envio do formulário
+        function simulateSubmission() {
+            // Obter valores dos campos
+            const name = document.getElementById('name').value || 'Não informado';
+            const email = document.getElementById('email').value || 'Não informado';
+            const phone = document.getElementById('phone').value || 'Não informado';
+            
+            // Validar se pelo menos um campo foi preenchido
+            if (name === 'Não informado' && email === 'Não informado' && phone === 'Não informado') {
+                alert('Por favor, preencha pelo menos um campo antes de enviar.');
+                return;
+            }
+            
+            // Adicionar aos dados coletados com timestamp
+            const timestamp = new Date().toLocaleString();
+            collectedData.push({
+                name,
+                email,
+                phone,
+                timestamp
+            });
+            
+            // Salvar no localStorage
+            localStorage.setItem('formData', JSON.stringify(collectedData));
+            
+            // Limpar o formulário
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            
+            // Mostrar mensagem de agradecimento
+            const preview = document.getElementById('data-preview');
+            preview.style.display = 'block';
+            preview.innerHTML = `
+                <h3><i class="fas fa-check-circle"></i> Obrigado por enviar!</h3>
+                <p>Esta é apenas uma demonstração. Seus dados não foram compartilhados.</p>
+            `;
+            
+            // Alert educacional
+            alert('Em um cenário real de phishing, esses dados seriam enviados para um servidor malicioso.\n\nNesta demonstração, os dados são armazenados apenas localmente no seu navegador para fins educacionais.');
+        }
+        
+        // Funções para o painel administrativo
+        function openAdminPanel() {
+            document.getElementById('admin-overlay').style.display = 'block';
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+        
+        function closeAdminPanel() {
+            document.getElementById('admin-overlay').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('admin-data').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+        }
+        
+        function accessAdminData() {
+            const password = document.getElementById('admin-password').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                // Carregar dados do localStorage
+                collectedData = JSON.parse(localStorage.getItem('formData')) || [];
+                
+                // Mostrar os dados coletados
+                const dataContainer = document.getElementById('admin-data-content');
+                dataContainer.innerHTML = '';
+                
+                if (collectedData.length === 0) {
+                    dataContainer.innerHTML = '<div class="empty-data"><i class="fas fa-inbox"></i> Nenhum dado foi coletado ainda.</div>';
+                } else {
+                    collectedData.forEach((data, index) => {
+                        dataContainer.innerHTML += `
+                            <div class="data-entry">
+                                <p><strong><i class="fas fa-record-vinyl"></i> Registro #${index + 1} (${data.timestamp})</strong></p>
+                                <p><strong>Nome:</strong> ${data.name}</p>
+                                <p><strong>E-mail:</strong> ${data.email}</p>
+                                <p><strong>Telefone:</strong> ${data.phone}</p>
+                            </div>
+                        `;
+                    });
+                }
+                
+                document.getElementById('admin-data').style.display = 'block';
+            } else {
+                alert('Senha incorreta! Use "admin123" para acessar.');
+            }
+        }
+        
+        function downloadData() {
+            if (collectedData.length === 0) {
+                alert('Não há dados para baixar!');
+                return;
+            }
+            
+            // Criar um blob com os dados em formato JSON
+            const dataStr = JSON.stringify(collectedData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            // Criar um link para download
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'dados_coletados.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('Download dos dados realizado com sucesso!');
+        }
+        
+        function clearAllData() {
+            if (collectedData.length === 0) {
+                alert('Não há dados para limpar!');
+                return;
+            }
+            
+            if (confirm('Tem certeza que deseja limpar todos os dados coletados? Esta ação não pode ser desfeita.')) {
+                collectedData = [];
+                localStorage.removeItem('formData');
+                document.getElementById('admin-data-content').innerHTML = '<div class="empty-data"><i class="fas fa-inbox"></i> Nenhum dado foi coletado ainda.</div>';
+                alert('Todos os dados foram removidos.');
+            }
+        }
+        
+        // Tecla Enter para submeter o formulário
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        simulateSubmission();
+                    }
+                });
+            });
+            
+            // Tecla Escape para fechar o painel admin
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeAdminPanel();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
